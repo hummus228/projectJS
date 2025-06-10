@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=10">
+  <title>Phone book</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/css.css">
+
+</head>
+
+<body>
+
+  <header class="header">
+    <h1 class="main_head">Phone book</h1>
+  </header>
+
+  <main class="wrapper">
+
+    <span class="user_count"></span>
+    <div class="search_items">
+
+      <div class="search_wrapper">
+        <input class="search_bar" type="search" id="search">
+        <i class="fa-solid fa-magnifying-glass search_icon"></i>
+      </div>
+
+
+      <div class="buttons">
+        <i class="fa-solid fa-user-plus create-contact-btn"></i>
+        <i class="fa-solid fa-trash-can"></i>
+      </div>
+
+    </div>
+
+    <ul class="contacts-list"></ul>
+
+  </main>
+
+  <footer class="footer">
+
+    <span>Kirill Pushkin</span>
+
+  </footer>
+
+  <div class="modal_bg">
+
+    <form class="contact_form">
+
+      <i class="fa-solid fa-xmark close-modal-btn"></i>
+
+      <div class="input_group">
+        <label for="name">Name :</label>
+        <input id="name" name="name" class="contact-form-input" type="text" data-key="name" required
+          autocomplete="name">
+      </div>
+
+      <div class="input_group">
+        <label for="phone">Phone :</label>
+        <input id="phone" name="phone" class="contact-form-input" type="tel" data-key="telephone" required
+          autocomplete="tel">
+      </div>
+
+      <div class="input_group">
+        <label for="address">Address :</label>
+        <input id="address" name="address" class="contact-form-input" type="text" data-key="address" required
+          autocomplete="street-address">
+      </div>
+
+      <div class="input_group">
+        <label for="age">Age :</label>
+        <input id="age" name="age" class="contact-form-input" type="number" data-key="age" min="0" required
+          autocomplete="off">
+      </div>
+
+      <div class="input_group">
+        <label for="imageurl">Image URL :</label>
+        <input id="imageurl" name="imageurl" class="contact-form-input" type="url" data-key="imageUrl" required
+          autocomplete="url">
+      </div>
+
+      <button class="save_input" type="button">Save</button>
+
+    </form>
+
+    <div class="contact_info"></div>
+
+  </div>
+
+  <script src="./js/index.js"></script>
+
+</body>
+
+</html>
