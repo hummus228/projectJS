@@ -198,6 +198,7 @@ i {
 
 .save_input {
   width: 80%;
+  height: 25px;
   margin: 0 auto;
   background-color: rgb(4, 78, 142);
   color: aliceblue;
@@ -205,6 +206,8 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  outline: none;
 }
 
 .close-modal-btn {
