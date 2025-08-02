@@ -24,7 +24,7 @@ body.light {
 body.dark {
   background-color: #121212;
   color: #d0e6f5;
-  i, .user_name {
+  i, .user_name, .user_count {
     color: #070707;
   }
   .light-theme, .dark-theme {
@@ -53,7 +53,7 @@ i {
 
 /* STYLES FOR FOOTER */
 .footer {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   height: 15%;
   display: flex;
@@ -80,10 +80,11 @@ i {
   gap: 10px;
   padding: 20px;
   height: calc(100vh - 30%);
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   background-color: rgb(224, 231, 237);
   overflow: auto;
+  border-radius: 10px;
 }
 
 /* STYLES FOR MAIN-HEADER WHICH CONTAINS CONTROLS-BUTTONS AND SEARCH INPUT AND UI OF CONTACTS COUNT */
@@ -249,6 +250,13 @@ i {
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+  label {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+  }
 }
 
 /* STYLES FOR SAVE INPUT BUTTON */
@@ -278,4 +286,53 @@ i {
 .info-item {
   display: flex;
   justify-content: space-between;
+}
+
+/* RESPONSIVE STYLES for max 435 px */
+@media only screen and (max-width: 435px) {
+  .user_profile_row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .user_profile {
+    display: flex;
+    flex-direction: column;
+    img {
+      margin-right: 0;
+    }
+  }
+
+  .user_actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+
+
+/* RESPONSIVE STYLES for max 385 px */
+@media only screen and (max-width: 385px) {
+  .contact_form {
+    position: relative;
+    width: 350px;
+    padding: 30px;
+    background-color: aliceblue;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .contact_info {
+    width: 350px;
+  }
 }
