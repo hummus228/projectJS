@@ -24,14 +24,26 @@ body.light {
 body.dark {
   background-color: #121212;
   color: #d0e6f5;
-  i, .user_name, .user_count {
+
+  i,
+  .user_name,
+  .user_count {
     color: #070707;
   }
-  .light-theme, .dark-theme {
+
+  .light-theme,
+  .dark-theme {
     color: #d0e6f5;
   }
+
   .wrapper {
     background-color: rgb(157, 201, 228);
+  }
+
+  /* fix text color in modals */
+  .contact_form,
+  .contact_info {
+    color: #070707;
   }
 }
 
@@ -75,7 +87,8 @@ i {
 }
 
 /* STYLES FOR THEME BUTTONS */
-.light-theme, .dark-theme {
+.light-theme,
+.dark-theme {
   font-size: 22px;
 }
 
@@ -256,12 +269,13 @@ i {
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+
   label {
     display: inline-block;
     max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
   }
 }
 
@@ -306,6 +320,7 @@ i {
   .user_profile {
     display: flex;
     flex-direction: column;
+
     img {
       margin-right: 0;
     }
