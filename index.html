@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=10">
   <title>Phone book</title>
+  <!-- Adding icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adding styles -->
   <link rel="stylesheet" href="./css/css.css">
-
 </head>
+<body class="light">
 
-<body>
-
+  <!-- HEADER -->
   <header class="header">
     <h1 class="main_head">Phone book</h1>
   </header>
 
+  <!-- MAIN - CONTENT - WRAPPER -->
   <main class="wrapper">
-
+    <!-- CONTACTS - COUNT -->
     <span class="user_count"></span>
     <div class="search_items">
 
+      <!-- SEARCH - INPUT -->
       <div class="search_wrapper">
         <input class="search_bar" type="search" id="search">
         <i class="fa-solid fa-magnifying-glass search_icon"></i>
       </div>
 
-
+      <!-- CONTROL - BUTTONS -->
       <div class="buttons">
         <i class="fa-solid fa-user-plus create-contact-btn"></i>
         <i class="fa-solid fa-trash-can"></i>
@@ -37,64 +38,76 @@
 
     </div>
 
+    <!-- CONTACTS - LIST -->
     <ul class="contacts-list"></ul>
-
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
-
+    <!-- NAMES -->
     <span>Kirill Pushkin & Yonatan Yuryev</span>
-
+    <!-- THEME SWITHC BUTTONS -->
+    <div class="theme-buttons-wrapper">
+      <i class="fa-solid fa-sun light-theme"></i>
+      <i class="fa-solid fa-moon dark-theme"></i>
+    </div>
   </footer>
 
+  <!-- MODAL - BACKGROUND -->
   <div class="modal_bg">
-
+    <!-- CONTACT FORM -->
     <form class="contact_form">
-
+      <!-- CLOSE BUTTON -->
       <i class="fa-solid fa-xmark close-modal-btn"></i>
 
+      <!-- NAME INPUT -->
       <div class="input_group">
         <label for="name">Name :</label>
         <input id="name" name="name" class="contact-form-input" type="text" data-key="name" required
           autocomplete="name">
       </div>
 
+      <!-- PHONE INPUT -->
       <div class="input_group">
         <label for="phone">Phone :</label>
         <input id="phone" name="phone" class="contact-form-input" type="tel" data-key="telephone" required
           autocomplete="tel">
       </div>
 
+      <!-- ADDRESS INPUT -->
       <div class="input_group">
         <label for="address">Address :</label>
         <input id="address" name="address" class="contact-form-input" type="text" data-key="address" required
           autocomplete="street-address">
       </div>
 
+      <!-- AGE INPUT -->
       <div class="input_group">
         <label for="age">Age :</label>
         <input id="age" name="age" class="contact-form-input" type="number" data-key="age" min="0" required
           autocomplete="off">
       </div>
 
+      <!-- IMAGE INPUT -->
       <div class="input_group">
         <label for="imageurl">Image URL :</label>
         <input id="imageurl" name="imageurl" class="contact-form-input" type="url" data-key="imageUrl" required
           autocomplete="url">
       </div>
 
+      <!-- SUBMIT INPUT -->
       <input class="save_input" type="submit" value="save" />
 
     </form>
 
+    <!-- CONTACT INFO WRAPPER -->
     <div class="contact_info"></div>
-
   </div>
 
+  <!-- SCRIPTS BY CORRECT ORDER -->
   <script src="./js/data.js"></script>
   <script src="./js/functions.js"></script>
   <script src="./js/index.js"></script>
-
 </body>
 
 </html>

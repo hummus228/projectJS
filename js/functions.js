@@ -11,6 +11,8 @@ const userCountSpan = document.querySelector(".user_count");
 const searchInput = document.querySelector("#search");
 const contactInfoModal = document.querySelector(".contact_info");
 const globalDeleteBtn = document.querySelector(".fa-trash-can");
+const themeButtonsWrapper = document.querySelector(".theme-buttons-wrapper");
+const bodyEl = document.querySelector('body');
 
 let editingId = null;
 
@@ -222,6 +224,18 @@ function onClickDeleteAllContacts() {
           }
         }, 650);
       });
+    }
+  });
+}
+
+function onClickChangeTheme() {
+  themeButtonsWrapper.addEventListener('click', (e) => {
+    if (e.target.classList.contains('light-theme')) {
+      bodyEl.classList.remove('dark');
+      bodyEl.classList.add('light');
+    } else if (e.target.classList.contains('dark-theme')) {
+      bodyEl.classList.remove('light');
+      bodyEl.classList.add('dark');
     }
   });
 }

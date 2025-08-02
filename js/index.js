@@ -11,3 +11,4 @@ onClickEditContactById();
 onClickShowContactInfo();
 onSearchInput();
 onClickDeleteAllContacts();
+onClickChangeTheme();
