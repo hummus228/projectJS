@@ -13,14 +13,47 @@ const contactInfoModal = document.querySelector(".contact_info");
 const globalDeleteBtn = document.querySelector(".fa-trash-can");
 const themeButtonsWrapper = document.querySelector(".theme-buttons-wrapper");
 const bodyEl = document.querySelector('body');
+const allFavBtn = document.querySelector('.all-fav-btn');
+
 
 let editingId = null;
+
+function onClickContactFavBtn() {
+  contactsListElement.addEventListener('click', (e) => {
+    const starBtn = e.target.closest('.contact-fav-btn');
+    if (starBtn) {
+      const contactEl = starBtn.closest(".contacts-item");
+      const id = Number(contactEl.dataset.id);
+      const contact = contacts.find(c => c.id === id);
+      contact.isFavorite = !contact.isFavorite;
+      if (showingFavorites) {
+        const favContacts = contacts.filter(c => c.isFavorite);
+        showContacts(favContacts);
+      } else {
+        showContacts();
+      }
+    }
+  });
+}
+
+let showingFavorites = false;
+allFavBtn.addEventListener('click', () => {
+  showingFavorites = !showingFavorites;
+  if (showingFavorites) {
+    const favContacts = contacts.filter(c => c.isFavorite);
+    showContacts(favContacts);
+    allFavBtn.classList.add('active');
+  } else {
+    showContacts();
+    allFavBtn.classList.remove('active');
+  }
+});
 
 // Declaring funcion - that creates html-contact-template as a string.
 // The function takes option variable - contactData as an object and returns it as a string.
 function contactHTML(contactData) {
   return `
-    <li class="contacts-item" data-id="${contactData.id}">
+     <li class="contacts-item" data-id="${contactData.id}">
       <div class="imge_icon">
         <div class="user_profile_row">
           <div class="user_profile">
@@ -28,6 +61,7 @@ function contactHTML(contactData) {
             <span class="user_name">${contactData.name}</span>
           </div>
           <div class="user_actions">
+            <i class="${contactData.isFavorite ? 'fa-solid' : 'fa-regular'} fa-star contact-fav-btn"></i>
             <i class="fa-solid fa-circle-info info-btn"></i>
             <i class="fa-solid fa-user-pen edit-btn"></i>
             <i class="fa-regular fa-trash-can remove-button"></i>
@@ -191,6 +225,7 @@ function onClickShowContactInfo() {
         <div><span>Age: </span><span>${contact.age}</span></div>
         <div><span>Telephone: </span><span>${contact.telephone}</span></div>
         <div><span>Adress: </span><span>${contact.address}</span></div>
+        <div><span>Email: <span></span>${contact.email}</span></div>
       `; // create the info-modal-element with content that contains contact-object-data
       contactInfoModal.replaceChildren(); // Removing previous content in HTML for avoiding duplicates
       contactInfoModal.insertAdjacentHTML('beforeend', infoEl); // Fill the contactInfoModal with created infoEl

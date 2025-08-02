@@ -42,6 +42,12 @@ i {
   font-size: 18px;
 }
 
+/* STYLES FOR FAV */
+.all-fav-btn.active {
+  color: gold;
+  transform: scale(1.2);
+}
+
 /* STYLES FOR HEADER */
 .header {
   height: 15%;
