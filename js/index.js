@@ -6,10 +6,12 @@ onContactMouseOver();
 onClickContactFavBtn();
 onClickCreateContact();
 onCloseModal();
-onClickSaveContact()
+onClickSaveContact();
 onClickRemoveContactById();
 onClickEditContactById();
 onClickShowContactInfo();
 onSearchInput();
 onClickDeleteAllContacts();
 onClickChangeTheme();
+showAllFavorites();
+isValidEmail();

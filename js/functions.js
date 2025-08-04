@@ -17,37 +17,40 @@ const allFavBtn = document.querySelector('.all-fav-btn');
 
 
 let editingId = null;
+let showingFavorites = false;
 
+// Declare function that  shows logic to add contact to favorites
 function onClickContactFavBtn() {
   contactsListElement.addEventListener('click', (e) => {
     const starBtn = e.target.closest('.contact-fav-btn');
     if (starBtn) {
-      const contactEl = starBtn.closest(".contacts-item");
-      const id = Number(contactEl.dataset.id);
-      const contact = contacts.find(c => c.id === id);
-      contact.isFavorite = !contact.isFavorite;
-      if (showingFavorites) {
-        const favContacts = contacts.filter(c => c.isFavorite);
-        showContacts(favContacts);
-      } else {
-        showContacts();
+      const contactEl = starBtn.closest(".contacts-item"); // Getting list element as object
+      const id = Number(contactEl.dataset.id); // Getting id as number from contactEl (li) from data-id attribute
+      const contact = contacts.find(c => c.id === id); // Getting only contact from contacts array with found id
+      contact.isFavorite = !contact.isFavorite; // Inverse the field isFavorite in found contact
+      if (showingFavorites) { // If only favorites openned 
+        const favContacts = contacts.filter(c => c.isFavorite); // Save in favContacts array only contacts with isFavorite=true
+        showContacts(favContacts); //Call func showContacts and pass as an argument modified array with only favorite contacts (favContacts)
+      } else { //f only favorites closed
+        showContacts(); //Call func showContacts (shows as a default all contacts)
       }
     }
   });
 }
-
-let showingFavorites = false;
-allFavBtn.addEventListener('click', () => {
-  showingFavorites = !showingFavorites;
-  if (showingFavorites) {
-    const favContacts = contacts.filter(c => c.isFavorite);
-    showContacts(favContacts);
-    allFavBtn.classList.add('active');
-  } else {
-    showContacts();
-    allFavBtn.classList.remove('active');
-  }
-});
+// Declare function that shows logic to show/hide all favorite contacts
+function showAllFavorites() {
+  allFavBtn.addEventListener('click', () => {
+    showingFavorites = !showingFavorites;
+    if (showingFavorites) {
+      const favContacts = contacts.filter(c => c.isFavorite);
+      showContacts(favContacts);
+      allFavBtn.classList.add('active');
+    } else {
+      showContacts();
+      allFavBtn.classList.remove('active');
+    }
+  });
+}
 
 // Declaring funcion - that creates html-contact-template as a string.
 // The function takes option variable - contactData as an object and returns it as a string.
@@ -59,6 +62,7 @@ function contactHTML(contactData) {
           <div class="user_profile">
             <img src="${contactData.imageUrl}" alt="img_icon">
             <span class="user_name">${contactData.name}</span>
+            <span class="user_phone">${contactData.telephone}</span>
           </div>
           <div class="user_actions">
             <i class="${contactData.isFavorite ? 'fa-solid' : 'fa-regular'} fa-star contact-fav-btn"></i>
@@ -105,7 +109,7 @@ function onContactMouseOver() {
     const item = event.target.closest(".contacts-item");
     if (item) item.classList.add("hover");
   });
-  
+
   contactsListElement.addEventListener("mouseout", (event) => {
     const item = event.target.closest(".contacts-item");
     if (item) item.classList.remove("hover");
@@ -121,7 +125,7 @@ function onClickCreateContact() {
     editingId = null; // Make this variable null beacause we create new contact
   });
 }
-
+// Declaring fuction that contains logic for closing modal
 function onCloseModal() {
   exitContactBtn.addEventListener('click', hideModal); // On click exitContactBtn call function-hideModal, so hiding modal
   modalBgElement.addEventListener('click', (event) => {
@@ -147,9 +151,16 @@ function onClickSaveContact() {
     for (const input of contactFormInputs) {
       if (!input.value.trim()) return alert("Please fill out all fields."); // If input is empty - alert fill input
       const key = input.dataset.key; // get and save key of the input which the same key as in our contact-object, like name, phone, etc...
+      if (key == 'email') {
+        const flag = isValidEmail(input.value)
+        if (!flag) {
+          alert('Incorect email');
+          return;
+        }
+      }
       newContact[key] = input.value.trim(); // save in our contact-object (IN KEY) the value of the current input
     }
-  
+
     // save in isDuplicate boolean value if this contact already exists (by ID and name and phone)
     const isDuplicate = contacts.some(c =>
       c.id !== editingId &&
@@ -158,7 +169,7 @@ function onClickSaveContact() {
     if (isDuplicate) {
       return alert("The contact already exists"); // If exists - alert
     }
-  
+
     if (editingId !== null) {
       const index = contacts.findIndex(c => c.id === editingId); // in this case-(IF) the contact exists, so we find here the id of the contact
       contacts[index] = { ...contacts[index], ...newContact }; // edit existed contact with new fields(values) and save them with old values that we didn't change
@@ -177,7 +188,7 @@ function onClickRemoveContactById() {
   contactsListElement.addEventListener('click', (event) => {
     const contactEl = event.target.closest(".contacts-item"); // find contact-element (li)
     const id = Number(contactEl.dataset.id); // get the id of contact from data-attribute
-  
+
     if (event.target.classList.contains("remove-button")) { // if click on remove-btn
       if (confirm("Are you sure?")) { // check if confirm
         setTimeout(() => { // making setTimeout for animation
@@ -199,7 +210,7 @@ function onClickEditContactById() {
     const contactEl = event.target.closest(".contacts-item");
     const id = Number(contactEl.dataset.id);
     const contact = contacts.find(c => c.id === id); // find needed contact-object using id
-  
+
     if (event.target.classList.contains("edit-btn")) { // if click on edit-btn-element
       editingId = id; // save id value of contact in this variable
       contactFormInputs.forEach(input => {
@@ -218,7 +229,7 @@ function onClickShowContactInfo() {
     const contactEl = event.target.closest(".contacts-item");
     const id = Number(contactEl.dataset.id);
     const contact = contacts.find(c => c.id === id);
-  
+
     if (event.target.classList.contains("info-btn")) { // if click on info-btn
       const infoEl = `
         <div><span>Name: </span><span>${contact.name}</span></div>
@@ -262,7 +273,7 @@ function onClickDeleteAllContacts() {
     }
   });
 }
-
+// Declare function that contains logic for changing the background theme
 function onClickChangeTheme() {
   themeButtonsWrapper.addEventListener('click', (e) => {
     if (e.target.classList.contains('light-theme')) {
@@ -274,3 +285,22 @@ function onClickChangeTheme() {
     }
   });
 }
+
+function isValidEmail(email) {
+  if (typeof email == "string") {
+    const arrayOfCharsOfEmail = email.split("")
+    if (arrayOfCharsOfEmail.includes('@')) {
+      let isShtrudle = false;
+      arrayOfCharsOfEmail.forEach((char, index) => {
+        if (index >= 4 && char == '@') {
+          isShtrudle = true;
+        }
+      });
+      if (isShtrudle)
+        return true;
+    }
+    return false;
+  }
+  return false;
+}
+
